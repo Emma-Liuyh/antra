@@ -1,0 +1,9 @@
+{
+	"name": "emmaADFantra",
+	"location": "westus2",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "97852033-2eca-4a6c-a2dd-588c7a7af2c4",
+		"tenantId": "d4d33b2e-4fe6-4e39-99c1-7c5e13be8300"
+	}
+}
