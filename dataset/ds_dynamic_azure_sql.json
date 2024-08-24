@@ -1,0 +1,46 @@
+{
+	"name": "ds_dynamic_azure_sql",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ServerName": "emmasqlantra.database.windows.net",
+				"DatabaseName": "WWI-Standard",
+				"userName": "emma.liuyh",
+				"pw": "abcd1234!"
+			}
+		},
+		"parameters": {
+			"ServerName": {
+				"type": "string",
+				"defaultValue": "emmasqlantra.database.windows.net"
+			},
+			"DatabaseName": {
+				"type": "string",
+				"defaultValue": "WWI-Standard"
+			},
+			"tableName": {
+				"type": "string",
+				"defaultValue": "orders"
+			},
+			"schemaName": {
+				"type": "string",
+				"defaultValue": "sales"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": {
+				"value": "@dataset().schemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().tableName",
+				"type": "Expression"
+			}
+		}
+	}
+}
