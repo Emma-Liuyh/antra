@@ -120,7 +120,7 @@
 				}
 			},
 			{
-				"name": "Web1",
+				"name": "Sent mail when pipline fail",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
