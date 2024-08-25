@@ -1,5 +1,5 @@
 {
-	"name": "ds_dynamic_azure_sql",
+	"name": "ds_dynamic_sqldb_source",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlDatabase1",
@@ -22,11 +22,11 @@
 			},
 			"tableName": {
 				"type": "string",
-				"defaultValue": "orders"
+				"defaultValue": "Orders"
 			},
 			"schemaName": {
 				"type": "string",
-				"defaultValue": "sales"
+				"defaultValue": "Sales"
 			}
 		},
 		"annotations": [],

@@ -33,7 +33,7 @@
 				}
 			},
 			{
-				"name": "ForEach1",
+				"name": "ForEachSchema",
 				"type": "ForEach",
 				"dependsOn": [
 					{
@@ -64,31 +64,54 @@
 							"userProperties": [],
 							"typeProperties": {
 								"source": {
-									"type": "JsonSource",
-									"storeSettings": {
-										"type": "AzureBlobStorageReadSettings",
-										"recursive": true,
-										"enablePartitionDiscovery": false
-									},
-									"formatSettings": {
-										"type": "JsonReadSettings"
-									}
+									"type": "AzureSqlSource",
+									"additionalColumns": [
+										{
+											"value": "$$FILEPATH"
+										}
+									],
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
 								},
 								"sink": {
 									"type": "ParquetSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings"
+										"type": "AzureBlobFSWriteSettings",
+										"copyBehavior": {
+											"value": "@item()",
+											"type": "Expression"
+										}
 									},
 									"formatSettings": {
 										"type": "ParquetWriteSettings"
 									}
 								},
-								"enableStaging": false
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
 							},
 							"inputs": [
 								{
-									"referenceName": "wwi_control_json",
-									"type": "DatasetReference"
+									"referenceName": "ds_dynamic_sqldb_source",
+									"type": "DatasetReference",
+									"parameters": {
+										"ServerName": "emmasqlantra.database.windows.net",
+										"DatabaseName": "WWI-Standard",
+										"tableName": {
+											"value": "@item().sourceTableName",
+											"type": "Expression"
+										},
+										"schemaName": {
+											"value": "@item().Application",
+											"type": "Expression"
+										}
+									}
 								}
 							],
 							"outputs": [
