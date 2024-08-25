@@ -3,7 +3,7 @@
 	"type": "Microsoft.DataFactory/factories/linkedservices",
 	"properties": {
 		"parameters": {
-			"ServerName": {
+			"DatabaseURL": {
 				"type": "string",
 				"defaultValue": "emmasqlantra.database.windows.net"
 			},
@@ -18,15 +18,12 @@
 			"pw": {
 				"type": "String",
 				"defaultValue": "abcd1234!"
-			},
-			"TableName": {
-				"type": "string"
 			}
 		},
 		"annotations": [],
 		"type": "AzureSqlDatabase",
 		"typeProperties": {
-			"server": "@{linkedService().ServerName}",
+			"server": "@{linkedService().DatabaseURL}",
 			"database": "@{linkedService().DatabaseName}",
 			"encrypt": "mandatory",
 			"trustServerCertificate": false,
