@@ -65,22 +65,17 @@
 							"typeProperties": {
 								"source": {
 									"type": "AzureSqlSource",
-									"additionalColumns": [
-										{
-											"value": "$$FILEPATH"
-										}
-									],
+									"additionalColumns": {
+										"type": "Expression",
+										"value": "@item().timeLastLoad"
+									},
 									"queryTimeout": "02:00:00",
 									"partitionOption": "None"
 								},
 								"sink": {
 									"type": "ParquetSink",
 									"storeSettings": {
-										"type": "AzureBlobFSWriteSettings",
-										"copyBehavior": {
-											"value": "@item()",
-											"type": "Expression"
-										}
+										"type": "AzureBlobFSWriteSettings"
 									},
 									"formatSettings": {
 										"type": "ParquetWriteSettings"
