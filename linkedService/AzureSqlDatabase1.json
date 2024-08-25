@@ -18,6 +18,9 @@
 			"pw": {
 				"type": "String",
 				"defaultValue": "abcd1234!"
+			},
+			"TableName": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
