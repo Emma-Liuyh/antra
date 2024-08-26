@@ -96,16 +96,17 @@
 									"referenceName": "ds_dynamic_sqldb_source",
 									"type": "DatasetReference",
 									"parameters": {
-										"ServerName": "emmasqlantra.database.windows.net",
+										"DatabaseURL": "emmasqlantra.database.windows.net",
 										"DatabaseName": "WWI-Standard",
-										"tableName": {
+										"TableName": {
 											"value": "@item().sourceTableName",
 											"type": "Expression"
 										},
-										"schemaName": {
+										"SchemaName": {
 											"value": "@item().Application",
 											"type": "Expression"
-										}
+										},
+										"user_sqldb": "emma.liuyh"
 									}
 								}
 							],

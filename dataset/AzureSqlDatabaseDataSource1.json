@@ -12,12 +12,28 @@
 				"pw": "abcd1234!"
 			}
 		},
+		"parameters": {
+			"TableName": {
+				"type": "string",
+				"defaultValue": "orders"
+			},
+			"SchemaName": {
+				"type": "string",
+				"defaultValue": "sales"
+			}
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "dbo",
-			"table": "DataSourceTable"
+			"schema": {
+				"value": "@dataset().SchemaName",
+				"type": "Expression"
+			},
+			"table": {
+				"value": "@dataset().TableName",
+				"type": "Expression"
+			}
 		}
 	}
 }
