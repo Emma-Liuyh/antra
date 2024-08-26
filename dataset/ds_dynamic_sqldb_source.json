@@ -52,11 +52,11 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": {
-				"value": "@dataset().schemaName",
+				"value": "@dataset().SchemaName",
 				"type": "Expression"
 			},
 			"table": {
-				"value": "@dataset().tableName",
+				"value": "@dataset().TableName",
 				"type": "Expression"
 			}
 		}
