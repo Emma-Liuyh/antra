@@ -20,6 +20,14 @@
 				"pw": {
 					"value": "@dataset().pw_sqldb",
 					"type": "Expression"
+				},
+				"SchemaName": {
+					"value": "@dataset().SchemaName",
+					"type": "Expression"
+				},
+				"TableName": {
+					"value": "@dataset().TableName",
+					"type": "Expression"
 				}
 			}
 		},
@@ -34,11 +42,11 @@
 			},
 			"TableName": {
 				"type": "string",
-				"defaultValue": "orders"
+				"defaultValue": "Orders"
 			},
 			"SchemaName": {
 				"type": "string",
-				"defaultValue": "sales"
+				"defaultValue": "Sales"
 			},
 			"user_sqldb": {
 				"type": "String",
