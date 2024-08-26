@@ -6,7 +6,7 @@
 			"type": "LinkedServiceReference",
 			"parameters": {
 				"DatabaseURL": {
-					"value": "@dataset().ServerName",
+					"value": "@dataset().DatabaseURL",
 					"type": "Expression"
 				},
 				"DatabaseName": {
@@ -20,14 +20,6 @@
 				"pw": {
 					"value": "@dataset().pw_sqldb",
 					"type": "Expression"
-				},
-				"SchemaName": {
-					"value": "@dataset().SchemaName",
-					"type": "Expression"
-				},
-				"TableName": {
-					"value": "@dataset().TableName",
-					"type": "Expression"
 				}
 			}
 		},
@@ -38,7 +30,7 @@
 			},
 			"DatabaseName": {
 				"type": "string",
-				"defaultValue": "WWI-Standard"
+				"defaultValue": "WideWorldImporters-Standard"
 			},
 			"TableName": {
 				"type": "string",
