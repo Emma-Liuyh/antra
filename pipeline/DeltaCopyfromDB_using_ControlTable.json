@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "SELECT schemaName, TableName, LastLoadTime from @pipeline().parameters.Control_Table_Table_Name",
+							"value": "SELECT SchemaName, TableName, LastLoadTime from @pipeline().parameters.Control_Table_Table_Name",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
