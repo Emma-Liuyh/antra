@@ -140,7 +140,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('LookupLastWaterMark').output\n",
+						"value": "@activity('LookupCurrentWaterMark').output.pipelineReturnValue",
 						"type": "Expression"
 					},
 					"activities": [
