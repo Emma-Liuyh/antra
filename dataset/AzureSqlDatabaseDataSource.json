@@ -16,8 +16,8 @@
 		"type": "AzureSqlTable",
 		"schema": [],
 		"typeProperties": {
-			"schema": "Application",
-			"table": "Cities"
+			"schema": "sales",
+			"table": "orders"
 		}
 	}
 }
