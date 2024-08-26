@@ -207,7 +207,7 @@
 			},
 			"Data_Source_WaterMarkColumn": {
 				"type": "String",
-				"defaultValue": "ValidFrom"
+				"defaultValue": "LastEditedWhen"
 			},
 			"Data_Destination_Container": {
 				"type": "String",
