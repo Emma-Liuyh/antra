@@ -14,11 +14,11 @@
 					"type": "Expression"
 				},
 				"userName": {
-					"value": "@dataset().user",
+					"value": "@dataset().user_sqldb",
 					"type": "Expression"
 				},
 				"pw": {
-					"value": "@dataset().pw-sqldb",
+					"value": "@dataset().pw_sqldb",
 					"type": "Expression"
 				}
 			}
@@ -38,11 +38,11 @@
 			"SchemaName": {
 				"type": "string"
 			},
-			"user": {
+			"user_sqldb": {
 				"type": "String",
 				"defaultValue": "emma.liuyh"
 			},
-			"pw-sqldb": {
+			"pw_sqldb": {
 				"type": "String",
 				"defaultValue": "abcd1234!"
 			}
