@@ -33,10 +33,12 @@
 				"defaultValue": "WWI-Standard"
 			},
 			"TableName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "StockItemTransactions"
 			},
 			"SchemaName": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "Warehouse"
 			},
 			"user_sqldb": {
 				"type": "String",
