@@ -214,8 +214,7 @@
 				"defaultValue": "https://adlsgen2emma.blob.core.windows.net/raw"
 			},
 			"Data_Destination_Directory": {
-				"type": "String",
-				"defaultValue": "https://adlsgen2emma.dfs.core.windows.net/"
+				"type": "String"
 			},
 			"Control_Table_Table_Name": {
 				"type": "String",
