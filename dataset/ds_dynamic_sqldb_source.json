@@ -5,11 +5,22 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"DatabaseURL": "emmasqlantra.database.windows.net",
-				"DatabaseName": "WWI-Standard",
-				"userName": "emma.liuyh",
-				"pw": "abcd1234!",
-				"ControlTable": "[dbo].[ControlTable]"
+				"DatabaseURL": {
+					"value": "@dataset().ServerName",
+					"type": "Expression"
+				},
+				"DatabaseName": {
+					"value": "@dataset().DatabaseName",
+					"type": "Expression"
+				},
+				"userName": {
+					"value": "@dataset().user",
+					"type": "Expression"
+				},
+				"pw": {
+					"value": "@dataset().pw-sqldb",
+					"type": "Expression"
+				}
 			}
 		},
 		"parameters": {
@@ -26,6 +37,14 @@
 			},
 			"SchemaName": {
 				"type": "string"
+			},
+			"user": {
+				"type": "String",
+				"defaultValue": "emma.liuyh"
+			},
+			"pw-sqldb": {
+				"type": "String",
+				"defaultValue": "abcd1234!"
 			}
 		},
 		"annotations": [],
