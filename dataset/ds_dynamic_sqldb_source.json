@@ -34,11 +34,11 @@
 			},
 			"TableName": {
 				"type": "string",
-				"defaultValue": "StockItemTransactions"
+				"defaultValue": "orders"
 			},
 			"SchemaName": {
 				"type": "string",
-				"defaultValue": "Warehouse"
+				"defaultValue": "sales"
 			},
 			"user_sqldb": {
 				"type": "String",
