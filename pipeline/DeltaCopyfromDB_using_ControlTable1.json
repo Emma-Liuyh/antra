@@ -1,0 +1,219 @@
+{
+	"name": "DeltaCopyfromDB_using_ControlTable1",
+	"properties": {
+		"description": "Copy new or updated rows only from database using external control table",
+		"activities": [
+			{
+				"name": "LookupLastWaterMark",
+				"description": "Retrieve the last high-watermark value stored in external control table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource",
+						"sqlReaderQuery": {
+							"value": "select @{pipeline().parameters.Control_Table_Column_Name} as WatermarkValue from @{pipeline().parameters.Control_Table_Table_Name}",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlDatabaseExternal_ControlTable",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "LookupCurrentWaterMark",
+				"description": "Retrieve  the current maximum value in watermark column of source data store",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('select MAX(',pipeline().parameters.Data_Source_WaterMarkColumn, ') as NewWatermarkValue from ',pipeline().parameters.Data_Source_Table_Name)",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlDatabaseDataSource",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "DeltaCopyfromDB",
+				"description": "Copy activity to use query to filter the delta data by > last high-watermark and <= current high-watermark from source database, and then only copy the changes to the destination store.",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "LookupCurrentWaterMark",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "LookupLastWaterMark",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from @{pipeline().parameters.Data_Source_Table_Name} where @{pipeline().parameters.Data_Source_WaterMarkColumn} > '@{activity('LookupLastWaterMark').output.firstRow.WatermarkValue}' and @{pipeline().parameters.Data_Source_WaterMarkColumn} <= '@{activity('LookupCurrentWaterMark').output.firstRow.NewWatermarkValue}'",
+							"type": "Expression"
+						},
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "ParquetSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "ParquetWriteSettings"
+						}
+					},
+					"enableStaging": false,
+					"dataIntegrationUnits": 0,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AzureSqlDatabaseDataSource",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dynamic_ADLS_sink",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "UpdateWaterMark",
+				"description": "Stored procedure activity to store the new high-watermark value into external control table for delta data loading. ",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "DeltaCopyfromDB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[update_control]",
+					"storedProcedureParameters": {
+						"LastModifyDate": {
+							"value": {
+								"value": "@activity('LookupCurrentWaterMark').output.firstRow.NewWatermarkValue",
+								"type": "Expression"
+							},
+							"type": "datetime"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference",
+					"parameters": {
+						"DatabaseURL": "emmasqlantra.database.windows.net",
+						"DatabaseName": "WideWorldImporters-Standard ",
+						"userName": "emma.liuyh",
+						"pw": "abcd1234!"
+					}
+				}
+			},
+			{
+				"name": "Sent mail when pipline fail",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "UpdateWaterMark",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-11.westus2.logic.azure.com:443/workflows/3e27e31d5ee84f84afd2e9ceb7c63eed/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=xEl76_sqFoE5qT-h6cgCLEMC-erY1AlBRCreJ56Aujg",
+					"body": "\n"
+				}
+			}
+		],
+		"parameters": {
+			"Data_Source_Table_Name": {
+				"type": "String",
+				"defaultValue": "[Application].[Cities]"
+			},
+			"Data_Source_WaterMarkColumn": {
+				"type": "String",
+				"defaultValue": "ValidFrom"
+			},
+			"Data_Destination_Container": {
+				"type": "String",
+				"defaultValue": "https://adlsgen2emma.blob.core.windows.net/raw"
+			},
+			"Data_Destination_Directory": {
+				"type": "String",
+				"defaultValue": "https://adlsgen2emma.dfs.core.windows.net/"
+			},
+			"Control_Table_Table_Name": {
+				"type": "String",
+				"defaultValue": "[dbo].[ControlTable]"
+			},
+			"Control_Table_Column_Name": {
+				"type": "String",
+				"defaultValue": "LastLoadTime"
+			}
+		},
+		"annotations": []
+	}
+}
