@@ -203,7 +203,7 @@
 		"parameters": {
 			"Data_Source_Table_Name": {
 				"type": "String",
-				"defaultValue": "[Sales].[Orders]"
+				"defaultValue": "Sales.Orders"
 			},
 			"Data_Source_WaterMarkColumn": {
 				"type": "String",
@@ -218,7 +218,7 @@
 			},
 			"Control_Table_Table_Name": {
 				"type": "String",
-				"defaultValue": "[dbo].[ControlTable]"
+				"defaultValue": "dbo.ControlTable"
 			},
 			"Control_Table_Column_Name": {
 				"type": "String",
