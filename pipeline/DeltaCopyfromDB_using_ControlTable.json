@@ -187,7 +187,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"DatabaseURL": "emmasqlantra.database.windows.net",
-										"DatabaseName": "WWI-Standard",
+										"DatabaseName": "WideWorldImporters-Standard",
 										"TableName": {
 											"value": "@item().SchemaName",
 											"type": "Expression"
