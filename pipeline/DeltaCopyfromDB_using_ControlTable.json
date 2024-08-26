@@ -25,7 +25,7 @@
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlDatabaseDataSource1",
+						"referenceName": "AzureSqlDatabaseExternal_ControlTable1",
 						"type": "DatasetReference"
 					}
 				}
