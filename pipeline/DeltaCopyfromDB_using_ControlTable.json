@@ -43,16 +43,22 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource",
-						"sqlReaderQuery": {
-							"value": "@concat('select MAX(',pipeline().parameters.Data_Source_WaterMarkColumn, ') as NewWatermarkValue from ',pipeline().parameters.Data_Source_Table_Name)",
-							"type": "Expression"
-						},
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": "@concat('select MAX(',pipeline().parameters.Data_Source_WaterMarkColumn, ') as NewWatermarkValue from ',pipeline().parameters.Data_Source_Table_Name)",
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlDatabaseDataSource1",
-						"type": "DatasetReference"
+						"referenceName": "ds_dynamic_sqldb_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"DatabaseURL": "emmasqlantra.database.windows.net",
+							"DatabaseName": "WideWorldImporters-Standard",
+							"TableName": "Orders",
+							"SchemaName": "Sales",
+							"user_sqldb": "emma.liuyh",
+							"pw_sqldb": "abcd1234!"
+						}
 					}
 				}
 			},
