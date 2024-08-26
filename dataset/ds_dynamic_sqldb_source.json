@@ -22,12 +22,10 @@
 				"defaultValue": "WWI-Standard"
 			},
 			"TableName": {
-				"type": "string",
-				"defaultValue": "Orders"
+				"type": "string"
 			},
 			"SchemaName": {
-				"type": "string",
-				"defaultValue": "Sales"
+				"type": "string"
 			}
 		},
 		"annotations": [],
