@@ -32,7 +32,7 @@
 			}
 		},
 		"parameters": {
-			"ServerName": {
+			"DatabaseURL": {
 				"type": "string",
 				"defaultValue": "emmasqlantra.database.windows.net"
 			},
