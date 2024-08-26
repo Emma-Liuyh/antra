@@ -18,14 +18,14 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@SELECT schemaName, TableName, LastLoadTime from pipeline().parameters.Control_Table_Table_Name",
+							"value": "SELECT schemaName, TableName, LastLoadTime from @pipeline().parameters.Control_Table_Table_Name",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
-						"referenceName": "AzureSqlDatabaseExternal_ControlTable1",
+						"referenceName": "AzureSqlDatabaseDataSource1",
 						"type": "DatasetReference"
 					}
 				}
@@ -50,10 +50,7 @@
 					},
 					"dataset": {
 						"referenceName": "AzureSqlDatabaseDataSource1",
-						"type": "DatasetReference",
-						"parameters": {
-							"SchemaName": "sales"
-						}
+						"type": "DatasetReference"
 					}
 				}
 			},
