@@ -81,11 +81,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource",
+						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from @{pipeline().parameters.Data_Source_Table_Name} where @{pipeline().parameters.Data_Source_WaterMarkColumn} > '@{activity('LookupLastWaterMark').output.firstRow.WatermarkValue}' and @{pipeline().parameters.Data_Source_WaterMarkColumn} <= '@{activity('LookupCurrentWaterMark').output.firstRow.NewWatermarkValue}'",
+							"value": "select * from @{pipeline().parameters.Data_Source_Table_Name} where @{pipeline().parameters.Data_Source_WaterMarkColumn} > '@{activity('LookupLastWaterMark').output.firstRow.WatermarkValue}' and @{pipeline().parameters.Data_Source_WaterMarkColumn} <= '@{activity('LookupCurrentWaterMark').output.firstRow.NewWatermarkValue}",
 							"type": "Expression"
 						},
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"sink": {
@@ -110,8 +111,16 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AzureSqlDatabaseDataSource",
-						"type": "DatasetReference"
+						"referenceName": "ds_dynamic_sqldb_source",
+						"type": "DatasetReference",
+						"parameters": {
+							"DatabaseURL": "emmasqlantra.database.windows.net",
+							"DatabaseName": "WideWorldImporters-Standard",
+							"TableName": "Orders",
+							"SchemaName": "Sales",
+							"user_sqldb": "emma.liuyh",
+							"pw_sqldb": "abcd1234!"
+						}
 					}
 				],
 				"outputs": [
