@@ -1,0 +1,23 @@
+{
+	"name": "AzureSqlDatabaseDataSource",
+	"properties": {
+		"description": "Connection to your source data store.",
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DatabaseURL": "emmasqlantra.database.windows.net",
+				"DatabaseName": "WideWorldImporters-Standard ",
+				"userName": "emma.liuyh",
+				"pw": "abcd1234!"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "Application",
+			"table": "Cities"
+		}
+	}
+}
