@@ -203,7 +203,7 @@
 		"parameters": {
 			"Data_Source_Table_Name": {
 				"type": "String",
-				"defaultValue": "[Application].[Cities]"
+				"defaultValue": "[Sales].[Orders]"
 			},
 			"Data_Source_WaterMarkColumn": {
 				"type": "String",
