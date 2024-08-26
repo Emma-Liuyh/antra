@@ -18,6 +18,12 @@
 			"pw": {
 				"type": "String",
 				"defaultValue": "abcd1234!"
+			},
+			"SchemaName": {
+				"type": "string"
+			},
+			"TableName": {
+				"type": "string"
 			}
 		},
 		"annotations": [],
