@@ -9,7 +9,7 @@
 			},
 			"DatabaseName": {
 				"type": "string",
-				"defaultValue": "WWI-Standard"
+				"defaultValue": "WideWorldImporters-Standard "
 			},
 			"userName": {
 				"type": "String",
