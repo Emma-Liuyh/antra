@@ -3,7 +3,10 @@
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage1",
-			"type": "LinkedServiceReference"
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"storage_account": "https://adlsgen2emma.dfs.core.windows.net/"
+			}
 		},
 		"annotations": [],
 		"type": "Parquet",

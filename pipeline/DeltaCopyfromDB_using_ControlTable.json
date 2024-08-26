@@ -16,11 +16,12 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlSource",
+						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select SchemaName,TableName,LastLoadTime from @{pipeline().parameters.Control_Table_Table_Name}",
+							"value": "@SELECT schemaName, TableName, LastLoadTime from pipeline().parameters.Control_Table_Column_Name",
 							"type": "Expression"
 						},
+						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
 					"dataset": {
@@ -92,8 +93,7 @@
 						"DatabaseURL": "emmasqlantra.database.windows.net",
 						"DatabaseName": "WWI-Standard",
 						"userName": "emma.liuyh",
-						"pw": "abcd1234!",
-						"ControlTable": "[dbo].[ControlTable]"
+						"pw": "abcd1234!"
 					}
 				}
 			},
@@ -142,7 +142,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('LookupLastWaterMark').output.value\n\n",
+						"value": "@activity('LookupLastWaterMark').output\n",
 						"type": "Expression"
 					},
 					"activities": [
@@ -188,7 +188,7 @@
 									"referenceName": "ds_dynamic_sqldb_source",
 									"type": "DatasetReference",
 									"parameters": {
-										"ServerName": "emmasqlantra.database.windows.net",
+										"DatabaseURL": "emmasqlantra.database.windows.net",
 										"DatabaseName": "WWI-Standard",
 										"TableName": {
 											"value": "@item().SchemaName",
@@ -238,10 +238,6 @@
 			"Control_Table_Column_Name": {
 				"type": "String",
 				"defaultValue": "LastLoadTime"
-			},
-			"Control_Table_Schema_Name": {
-				"type": "string",
-				"defaultValue": "[dbo].[ControlTable].[TableName]"
 			}
 		},
 		"annotations": []
