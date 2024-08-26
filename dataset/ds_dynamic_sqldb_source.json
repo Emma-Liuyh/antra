@@ -5,10 +5,11 @@
 			"referenceName": "AzureSqlDatabase1",
 			"type": "LinkedServiceReference",
 			"parameters": {
-				"ServerName": "emmasqlantra.database.windows.net",
+				"DatabaseURL": "emmasqlantra.database.windows.net",
 				"DatabaseName": "WWI-Standard",
 				"userName": "emma.liuyh",
-				"pw": "abcd1234!"
+				"pw": "abcd1234!",
+				"ControlTable": "[dbo].[ControlTable]"
 			}
 		},
 		"parameters": {
@@ -20,11 +21,11 @@
 				"type": "string",
 				"defaultValue": "WWI-Standard"
 			},
-			"tableName": {
+			"TableName": {
 				"type": "string",
 				"defaultValue": "Orders"
 			},
-			"schemaName": {
+			"SchemaName": {
 				"type": "string",
 				"defaultValue": "Sales"
 			}
