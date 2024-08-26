@@ -18,6 +18,10 @@
 			"pw": {
 				"type": "String",
 				"defaultValue": "abcd1234!"
+			},
+			"ControlTable": {
+				"type": "string",
+				"defaultValue": "[dbo].[ControlTable]"
 			}
 		},
 		"annotations": [],
