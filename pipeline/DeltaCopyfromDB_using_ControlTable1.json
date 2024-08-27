@@ -111,16 +111,8 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "ds_dynamic_sqldb_source",
-						"type": "DatasetReference",
-						"parameters": {
-							"DatabaseURL": "emmasqlantra.database.windows.net",
-							"DatabaseName": "WideWorldImporters-Standard",
-							"TableName": "Orders",
-							"SchemaName": "Sales",
-							"user_sqldb": "emma.liuyh",
-							"pw_sqldb": "abcd1234!"
-						}
+						"referenceName": "AzureSqlDatabaseDataSource",
+						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
