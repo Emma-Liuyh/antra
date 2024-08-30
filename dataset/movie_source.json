@@ -10,8 +10,7 @@
 		},
 		"parameters": {
 			"fileName": {
-				"type": "String",
-				"defaultValue": "output_part_1.json"
+				"type": "String"
 			},
 			"sourceContainer": {
 				"type": "String",
