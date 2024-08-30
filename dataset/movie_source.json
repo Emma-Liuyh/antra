@@ -1,0 +1,38 @@
+{
+	"name": "movie_source",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"srorageName": "blobnohierarchical"
+			}
+		},
+		"parameters": {
+			"fileName": {
+				"type": "String",
+				"defaultValue": "output_part_1.json"
+			},
+			"sourceContainer": {
+				"type": "String",
+				"defaultValue": "raw"
+			}
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
+				"container": {
+					"value": "@dataset().sourceContainer",
+					"type": "Expression"
+				}
+			}
+		},
+		"schema": {}
+	}
+}
