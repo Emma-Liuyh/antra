@@ -1,6 +1,13 @@
 {
 	"name": "movie_ControlFile",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"srorageName": "blobnohierarchical"
+			}
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {
