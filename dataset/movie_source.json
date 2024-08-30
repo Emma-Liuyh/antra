@@ -12,6 +12,10 @@
 			"sourceContainer": {
 				"type": "String",
 				"defaultValue": "raw"
+			},
+			"fileName": {
+				"type": "String",
+				"defaultValue": "output_part_1.json"
 			}
 		},
 		"annotations": [],
@@ -19,6 +23,10 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().fileName",
+					"type": "Expression"
+				},
 				"container": {
 					"value": "@dataset().sourceContainer",
 					"type": "Expression"
