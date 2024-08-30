@@ -32,8 +32,104 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "loopJSON",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "LookupMovie",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('LookupMovie').output.value/files",
+						"type": "Expression"
+					},
+					"activities": [
+						{
+							"name": "Copydata",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "JsonSource",
+									"storeSettings": {
+										"type": "AzureBlobStorageReadSettings",
+										"recursive": true,
+										"enablePartitionDiscovery": false
+									},
+									"formatSettings": {
+										"type": "JsonReadSettings"
+									}
+								},
+								"sink": {
+									"type": "JsonSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "JsonWriteSettings"
+									}
+								},
+								"enableStaging": false
+							},
+							"inputs": [
+								{
+									"referenceName": "movie_source",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@item()",
+											"type": "Expression"
+										},
+										"sourceContainer": "raw"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "movie_sink",
+									"type": "DatasetReference",
+									"parameters": {
+										"fileName": {
+											"value": "@item()",
+											"type": "Expression"
+										},
+										"containName": {
+											"value": "@pipeline().parameters.sinkContainer",
+											"type": "Expression"
+										}
+									}
+								}
+							]
+						}
+					]
+				}
 			}
 		],
+		"parameters": {
+			"sinkContainer": {
+				"type": "string",
+				"defaultValue": "bronze"
+			},
+			"sourceContainer": {
+				"type": "string",
+				"defaultValue": "raw"
+			}
+		},
 		"annotations": []
 	}
 }
