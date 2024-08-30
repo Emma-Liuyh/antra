@@ -95,7 +95,10 @@
 											"value": "@item()",
 											"type": "Expression"
 										},
-										"sourceContainer": "raw"
+										"sourceContainer": {
+											"value": "@pipeline().parameters.sourceContainer",
+											"type": "Expression"
+										}
 									}
 								}
 							],
