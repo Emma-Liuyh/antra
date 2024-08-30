@@ -1,0 +1,29 @@
+{
+	"name": "movie_ControlFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorageMovie",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "controlTable.json",
+				"container": "config"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"files": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
