@@ -108,7 +108,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"fileName": {
-											"value": "@item()",
+											"value": "@length(item().files)",
 											"type": "Expression"
 										},
 										"containName": {
