@@ -91,12 +91,12 @@
 									"referenceName": "movie_source",
 									"type": "DatasetReference",
 									"parameters": {
-										"fileName": {
-											"value": "@item()",
-											"type": "Expression"
-										},
 										"sourceContainer": {
 											"value": "@pipeline().parameters.sourceContainer",
+											"type": "Expression"
+										},
+										"fileName": {
+											"value": "@length(item().files)",
 											"type": "Expression"
 										}
 									}
