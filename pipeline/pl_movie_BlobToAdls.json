@@ -47,7 +47,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"items": {
-						"value": "@activity('LookupMovie').output",
+						"value": "@activity('LookupMovie').output.firstRow.files",
 						"type": "Expression"
 					},
 					"activities": [
