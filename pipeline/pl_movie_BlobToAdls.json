@@ -30,7 +30,7 @@
 						"referenceName": "movie_ControlFile",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": false
+					"firstRowOnly": true
 				}
 			},
 			{
