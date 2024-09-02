@@ -121,6 +121,40 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "process Data",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "loopJSON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/emma_liuyh@hotmail.com/raw to staging notebook",
+					"baseParameters": {
+						"sink": "abfss://<raw>@<blobnohierarchical>.dfs.core.windows.net",
+						"source": {
+							"value": "@pipeline().parameters.sourceContainer",
+							"type": "Expression"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricks1",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
