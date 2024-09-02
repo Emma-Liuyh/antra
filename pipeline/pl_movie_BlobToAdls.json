@@ -144,11 +144,10 @@
 				"typeProperties": {
 					"notebookPath": "/Users/emma_liuyh@hotmail.com/raw to staging notebook",
 					"baseParameters": {
-						"sink": "abfss://<raw>@<blobnohierarchical>.dfs.core.windows.net",
-						"source": {
-							"value": "@pipeline().parameters.sourceContainer",
-							"type": "Expression"
-						}
+						"source_account": "blobnohierarchical",
+						"source_container": "raw",
+						"sink_account": "movieadls",
+						"sink_container": "bronze"
 					}
 				},
 				"linkedServiceName": {
